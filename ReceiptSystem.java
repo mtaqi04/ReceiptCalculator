@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -63,6 +64,34 @@ public class ReceiptSystem {
                         Item item = new Item(itemName, price, quantity);
                         newReceipt.addItem(item);
                     }
+
+                    // Prompt for payment method
+                    System.out.println("Select payment method:");
+                    System.out.println("1. Cash");
+                    System.out.println("2. Credit Card");
+                    System.out.print("Enter your choice: ");
+                    int paymentChoice = scanner.nextInt();
+                    Payment payment = null;
+
+                    switch (paymentChoice) {
+                        case 1:
+                            System.out.println("Enter cash amount: ");
+                            double cashAmount = scanner.nextDouble();
+                            payment = new CashPayment(cashAmount);
+                            break;
+                        case 2:
+                            System.out.println("Enter card number: ");
+                            String cardNumber = scanner.next();
+                            System.out.println("Enter card amount: ");
+                            double cardAmount = scanner.nextDouble();
+                            payment = new CreditCardPayment(cardAmount, cardNumber);
+                            break;
+                        default:
+                            System.out.println("Invalid payment method. Defaulting to cash payment with amount $0.");
+                            payment = new CashPayment(0);
+                    }
+
+                    newReceipt.setPaymentMethod(payment);
 
                     // Calculate total and add receipt to lists
                     newReceipt.calculateTotal();

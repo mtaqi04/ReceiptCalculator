@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 public class Receipt {
     private int id;
@@ -44,6 +44,7 @@ public class Receipt {
     public String toString() {
         String storeName = (store != null) ? store.getName() : "No Store Assigned";
         String customerName = (customer != null) ? customer.getName() : "No Customer Assigned";
-        return "Store: " + storeName + ", Customer: " + customerName + ", Total: " + totalAmount;
+        String paymentDetails = (paymentMethod != null) ? paymentMethod.getType() + " - $" + paymentMethod.getAmount() : "No Payment";
+        return "Store: " + storeName + ", Customer: " + customerName + ", Total: $" + totalAmount + ", Payment: " + paymentDetails;
     }
 }
